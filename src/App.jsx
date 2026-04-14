@@ -59,16 +59,23 @@ const ERP_MODULES = [
 
 const CURRENCY_MODULES = new Set(['caja', 'deudas', 'nominas', 'compras']);
 
-const initializeData = () => {
-  const stored = localStorage.getItem('erpx-data');
-  if (stored) {
-    return JSON.parse(stored);
-  }
-
-  return ERP_MODULES.reduce((acc, module) => {
+const buildSeedData = () =>
+  ERP_MODULES.reduce((acc, module) => {
     acc[module.key] = module.seed.map((item, index) => ({ id: crypto.randomUUID(), ...item, order: index }));
     return acc;
   }, {});
+
+const initializeData = () => {
+  const stored = localStorage.getItem('erpx-data');
+  if (stored) {
+    try {
+      return JSON.parse(stored);
+    } catch (error) {
+      console.warn('No se pudo leer erpx-data desde localStorage; se restaurarán datos iniciales.', error);
+    }
+  }
+
+  return buildSeedData();
 };
 
 const prettyField = (field) => field.charAt(0).toUpperCase() + field.slice(1);

@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.1.0",
   "type": "module",
+  "homepage": "https://amaurys.github.io/ERPX",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -15,10 +16,5 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
     "vite": "^5.4.8"
-  }  
-    "homepage": "https://amaurys.github.io/ERPX",
-    "scripts": {
-      "predeploy": "npm run build",
-      "deploy": "gh-pages -b gh-pages -d build"    
   }
 }
